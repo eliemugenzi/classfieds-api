@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize';
 
 import User from './User';
-import Application from './Application';
 import Token from './Token';
-import Job from './Job';
+import Category from './Category';
+import Product from './Product';
 
 import 'dotenv/config';
 import DBConfig from '../config/config';
@@ -11,29 +11,24 @@ import DBConfig from '../config/config';
 const env = process.env.NODE_ENV || 'development';
 const config: any = DBConfig[env];
 
-User.hasMany(Application, {
-  as: 'applications',
-  foreignKey: 'user_id',
-});
-
-Application.belongsTo(User, {
-  as: 'user',
-  foreignKey: 'user_id',
-});
-
 Token.belongsTo(User, {
   foreignKey: 'user_id',
   as: 'user',
 });
 
-Job.hasMany(Application, {
-  as: 'applications',
-  foreignKey: 'job_id',
+Product.belongsTo(Category, {
+  as: 'category',
+  foreignKey: 'category_id',
 });
 
-Application.belongsTo(Job, {
-  as: 'job',
-  foreignKey: 'job_id',
+Product.belongsTo(User, {
+  as: 'seller',
+  foreignKey: 'user_id',
+});
+
+User.hasMany(Product, {
+  as: 'products',
+  foreignKey: 'user_id',
 });
 
 interface Database {

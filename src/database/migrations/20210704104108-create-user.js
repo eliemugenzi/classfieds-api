@@ -17,7 +17,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.STRING,
-        defaultValue: 'inactive',
+        defaultValue: 'active',
       },
       phone_number: {
         type: Sequelize.STRING,
@@ -27,7 +27,7 @@ module.exports = {
       },
       role: {
         type: Sequelize.STRING,
-        defaultValue: 'applicant',
+        defaultValue: 'customer',
       },
       password: {
         type: Sequelize.STRING,

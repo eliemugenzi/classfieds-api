@@ -2,23 +2,35 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('jobs', {
+    return queryInterface.createTable('products', {
       id: {
         type: Sequelize.BIGINT,
-        allowNull: true,
+        allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      title: {
+      name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
+      },
+      image: {
+        type: Sequelize.STRING,
+      },
+      price: {
+        type: Sequelize.DECIMAL,
+        defaultValue: 0.0,
       },
       status: {
         type: Sequelize.STRING,
-        defaultValue: 'open',
+        defaultValue: 'available',
+      },
+      category_id: {
+        type: Sequelize.INTEGER,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -32,6 +44,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('jobs');
+    return queryInterface.dropTable('products');
   },
 };

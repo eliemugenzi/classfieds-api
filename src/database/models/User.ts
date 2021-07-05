@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import { sequelize } from '.';
 
-import Application from 'models/Application';
+import Product from './Product';
 
 /**
  * User Class Model
@@ -15,9 +15,10 @@ class User extends Model {
   public first_name!: string;
   public last_name!: string;
   public status!: 'active' | 'inactive';
-  public role!: 'applicant' | 'hr';
+  public role!: 'customer' | 'seller';
 
-  public readonly applications?: Application[];
+  public readonly products?: Product[];
+
   public readonly created_at!: Date;
   public readonly updated_at!: Date;
 }
@@ -57,7 +58,7 @@ User.init(
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: 'applicant',
+      defaultValue: 'customer',
     },
   },
   {

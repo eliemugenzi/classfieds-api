@@ -8,6 +8,7 @@ export const signUpRule = celebrate({
     password: Joi.string().min(6).max(15).required(),
     first_name: Joi.string().required(),
     last_name: Joi.string().required(),
+    role: Joi.string().valid('customer', 'seller'),
   }),
 });
 

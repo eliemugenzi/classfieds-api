@@ -24,7 +24,6 @@ export const signUp = asyncHandler(async (req: Request, res: Response): Promise<
 
   user = await User.create({
     ...body,
-    role: 'hr',
   });
 
   const token = await AuthHelper.generateToken({

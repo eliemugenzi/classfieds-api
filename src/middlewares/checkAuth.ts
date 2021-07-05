@@ -13,7 +13,7 @@ const { JWT_SECRET_KEY = '' } = process.env;
 
 interface CheckAuth {
   confirmPassword?: boolean;
-  roles?: Array<'applicant' | 'hr'>;
+  roles?: Array<'customer' | 'seller'>;
 }
 
 const checkAuth = ({ roles = [], confirmPassword }: CheckAuth = {}): any =>

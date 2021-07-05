@@ -2,26 +2,19 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('applications', {
+    return queryInterface.createTable('categories', {
       id: {
         type: Sequelize.BIGINT,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      resume_url: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.STRING,
-        defaultValue: 'pending',
-      },
       description: {
         type: Sequelize.TEXT,
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -35,6 +28,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('applications');
+    return queryInterface.dropTable('categories');
   },
 };

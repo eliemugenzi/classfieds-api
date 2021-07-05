@@ -1,23 +1,20 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '.';
-import Application from './Application';
 
 /**
  * Job Class Model
  */
 
-class Job extends Model {
+class Category extends Model {
   public id!: number;
-  public title!: string;
+  public name!: string;
   public description!: string;
-  public status!: 'open' | 'closed';
 
-  public readonly applications?: Application[];
   public readonly created_at!: Date;
   public readonly updated_at!: Date;
 }
 
-Job.init(
+Category.init(
   {
     id: {
       type: DataTypes.BIGINT,
@@ -25,7 +22,7 @@ Job.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -36,11 +33,11 @@ Job.init(
   {
     sequelize,
     underscored: true,
-    tableName: 'jobs',
+    tableName: 'categories',
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
   },
 );
 
-export default Job;
+export default Category;
