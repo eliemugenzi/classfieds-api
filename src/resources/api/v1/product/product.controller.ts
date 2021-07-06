@@ -118,3 +118,57 @@ export const createOne = asyncHandler(async (req: any, res: Response) => {
     },
   });
 });
+
+export const getMine = asyncHandler(async (req: any, res: Response) => {
+  const {
+    query: { page = 1, limit = 10, search },
+    currentUser,
+  } = req;
+
+  const offset = limit * (page - 1);
+
+  const filter: any = {};
+
+  if (search) {
+    filter[Op.or] = [];
+    filter[Op.or].push({
+      name: {
+        [Op.iLike]: `%${search}%`,
+      },
+    });
+  }
+
+  const products = await Product.findAndCountAll({
+    where: {
+      ...filter,
+      user_id: currentUser?.id,
+    },
+    offset,
+    limit,
+    order: [['name', 'ASC']],
+    include: [
+      {
+        model: User,
+        as: 'seller',
+      },
+      {
+        model: Category,
+        as: 'category',
+      },
+    ],
+  });
+
+  const total = products.count;
+  const pages = Math.ceil(total / limit);
+
+  return jsonResponse({
+    res,
+    status: OK,
+    data: products.rows,
+    meta: {
+      page,
+      pages,
+      total,
+    },
+  });
+});
