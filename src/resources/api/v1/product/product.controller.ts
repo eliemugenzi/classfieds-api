@@ -1,4 +1,4 @@
-import { Response, NextFunction } from 'express';
+import { Response, NextFunction, Request } from 'express';
 import { Op } from 'sequelize';
 import asyncHandler from 'middlewares/asyncHandler';
 import jsonResponse from 'helpers/jsonResponse';
@@ -170,5 +170,15 @@ export const getMine = asyncHandler(async (req: any, res: Response) => {
       pages,
       total,
     },
+  });
+});
+
+export const getCategories = asyncHandler(async (req: Request, res: Response) => {
+  const categories = await Category.findAll();
+
+  return jsonResponse({
+    res,
+    status: OK,
+    data: categories,
   });
 });
