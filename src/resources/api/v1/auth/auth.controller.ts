@@ -81,3 +81,17 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     },
   });
 });
+
+export const logOut = asyncHandler(async (req: any, res: Response) => {
+  const { token } = req;
+
+  await token?.update({
+    status: 'logged_out',
+  });
+
+  return jsonResponse({
+    res,
+    status: statusCodes.OK,
+    message: 'You are logged out successfully',
+  });
+});
