@@ -33,7 +33,7 @@ app.get('/', (req: Request, res: Response) => {
   return jsonResponse({
     status: OK,
     res,
-    message: 'Welcome to TalentMatch API',
+    message: 'Welcome to ClassiFieds API',
   });
 });
 
